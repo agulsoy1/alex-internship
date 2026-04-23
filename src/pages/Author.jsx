@@ -1,10 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AuthorBanner from "../images/author_banner.jpg";
 import AuthorItems from "../components/author/AuthorItems";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import AuthorImage from "../images/author_thumbnail.jpg";
+import axios from "axios";
 
 const Author = () => {
+  const location = useLocation();
+  const authorFromState = location.state?.author;
+  const { id } = useParams();
+  const [author, setAuthor] = useState(null);
+
+  useEffect(() => {
+
+    window.scrollTo(0, 0);
+
+    const fetchAuthor = async () => {
+      try {
+        const res = await axios.get(
+          "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections",
+        );
+        const foundAuthor = res.data.find(
+          (user) => String(user.authorId) === String(id),
+        );
+        setAuthor(foundAuthor);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchAuthor();
+  }, [id]);
+
   return (
     <div id="wrapper">
       <div className="no-bottom no-top" id="content">
@@ -15,7 +42,7 @@ const Author = () => {
           aria-label="section"
           className="text-light"
           data-bgimage="url(images/author_banner.jpg) top"
-          style={{ background: `url(${AuthorBanner}) top` }}
+          style={{ background: `url(${author?.nftImage}) top`, backgroundSize: "cover", backgroundRepeat: "no-repeat"}}
         ></section>
 
         <section aria-label="section">
@@ -25,7 +52,7 @@ const Author = () => {
                 <div className="d_profile de-flex">
                   <div className="de-flex-col">
                     <div className="profile_avatar">
-                      <img src={AuthorImage} alt="" />
+                      <img src={author?.authorImage} alt="" />
 
                       <i className="fa fa-check"></i>
                       <div className="profile_name">
