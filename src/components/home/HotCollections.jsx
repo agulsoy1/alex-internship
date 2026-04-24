@@ -4,6 +4,8 @@ import axios from "axios";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import "../../../src/css/styles/hot-collections.css";
+import leftArrow from "../../images/left__arrow.png"
+import rightArrow from "../../images/right__arrow.png"
 
 const HotCollections = () => {
   const [users, setUsers] = useState([]);
@@ -72,7 +74,8 @@ const HotCollections = () => {
                 className="arrow arrow-left"
                 onClick={() => instanceRef.current?.prev()}
               >
-                ➱
+                ➩
+                {/* <img src={leftArrow} alt="" className="arrow__imgs arrow__left--img"/> */}
               </button>
             )}
             {loading ? (
@@ -134,7 +137,8 @@ const HotCollections = () => {
                 className="arrow arrow-right"
                 onClick={() => instanceRef.current?.next()}
               >
-                ➱
+                ➩
+                {/* <img src={rightArrow} alt="" className="arrow__imgs arrow__right--img"/> */}
               </button>
             )}
           </div>

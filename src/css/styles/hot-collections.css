@@ -11,21 +11,24 @@
   min-width: 250px;
 }
 
-.slider-wrapper {
+.slider__wrapper {
   position: relative;
 }
 
 .arrow {
   position: absolute;
-  top: 60%;
+  top: 45%;
   display: flex;
-  font-size: 60px;
+  font-size: 100px;
   background: none;
   border: none;
   padding: 4px 0;
   color: black;
   cursor: pointer;
   z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .arrow:disabled {
@@ -33,13 +36,13 @@
   cursor: not-allowed;
 }
 
-.arrow-left {
-  left: 0;
-  transform: rotate(180deg);
+.arrow-right{
+  left: 96%;
 }
 
-.arrow-right {
-  right: 0;
+.arrow-left{
+  right: 96%;
+  transform: rotate(180deg)
 }
 
 .nft__loading--container {
