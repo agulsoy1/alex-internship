@@ -53,8 +53,6 @@ const HotCollections = () => {
         setLoading(false);
       }
     };
-    console.log("users: ", users)
-
     fetchUsers();
   }, []);
 
