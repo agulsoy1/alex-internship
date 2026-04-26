@@ -3,8 +3,44 @@ import { Link } from "react-router-dom";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
 import axios from "axios";
+import 'keen-slider/keen-slider.min.css'
+import KeenSlider from 'keen-slider'
+import useKeenSlider from 'keen-slider'
 
 const NewItems = () => {
+
+
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [sliderRef, instanceRef] = useKeenSlider({
+    loop: true,
+    slides: {
+      perView: 4,
+      spacing: 15,
+    },
+
+    breakpoints: {
+      "(max-width: 991px)": {
+        slides: {
+          perView: 3,
+          spacing: 12,
+        },
+      },
+      "(max-width: 768px)": {
+        slides: {
+          perView: 2,
+          spacing: 12,
+        },
+      },
+      "(max-width: 576px)": {
+        slides: {
+          perView: 1,
+          spacing: 12,
+        },
+      },
+    },
+  });
+
   const [items, setItems] = useState();
   useEffect(() => {
     const fetchNewItems = async () => {
