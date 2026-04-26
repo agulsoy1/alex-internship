@@ -1,0 +1,7 @@
+*{
+    box-sizing: border-box;
+}
+
+.keen__slider{
+    display: flex;
+}

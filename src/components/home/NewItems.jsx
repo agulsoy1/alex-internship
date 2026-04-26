@@ -4,8 +4,8 @@ import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
 import axios from "axios";
 import "keen-slider/keen-slider.min.css";
-import KeenSlider from "keen-slider";
-import useKeenSlider from "keen-slider";
+// import KeenSlider from "keen-slider/react";
+import {useKeenSlider} from "keen-slider/react";
 
 const NewItems = () => {
   const [users, setUsers] = useState([]);
@@ -60,7 +60,7 @@ const NewItems = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <div ref="sliderRef" className="keen__slider">
+          <div ref={sliderRef} className="keen__slider">
             {items?.map((item, index) => (
               <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key="index">
                 <div className="nft__item">
