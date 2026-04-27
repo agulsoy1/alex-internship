@@ -46,6 +46,7 @@ const NewItems = () => {
         "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems",
       );
       setItems(gotItems.data);
+      console.log(items)
     };
     fetchNewItems();
   }, []);
@@ -75,7 +76,8 @@ const NewItems = () => {
                       <i className="fa fa-check"></i>
                     </Link>
                   </div>
-                  <div className="de_countdown">5h 30m 32s</div>
+                  {/* <div className="de_countdown">5h 30m 32s</div> */}
+                  <div className="de_countdown">{item.expiryDate}</div>
                   <div className="nft__item_wrap">
                     <div className="nft__item_extra">
                       <div className="nft__item_buttons">
