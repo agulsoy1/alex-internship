@@ -4,11 +4,11 @@ import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
 import axios from "axios";
 import "keen-slider/keen-slider.min.css";
-// import KeenSlider from "keen-slider/react";
-import {useKeenSlider} from "keen-slider/react";
+import { useKeenSlider } from "keen-slider/react";
+import "../../css/styles/new-items.css";
 
 const NewItems = () => {
-  const [users, setUsers] = useState([]);
+  const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [sliderRef, instanceRef] = useKeenSlider({
     loop: true,
@@ -39,14 +39,56 @@ const NewItems = () => {
     },
   });
 
-  const [items, setItems] = useState();
+  // const expiryDate = (items) => {
+  //   if (items.length > 0) {
+  //     items.forEach((item) => {
+  //       const today = item.expiryDate - Date.now();
+  //       // const milliseconds = today / 1000;
+  //       const seconds = today / 1000;
+  //       const minutes = seconds / 60;
+  //       const hours = minutes / 24;
+  //       console.log("seconds = ", seconds);
+  //       console.log("minutes = ", minutes);
+  //       console.log("hours = ", hours);
+  //     });
+  //   }
+  // };
+
+  useEffect(() => {
+    if (items.length > 0) {
+      items.forEach((item) => {
+        if(item.expiryDate){
+          const today = item.expiryDate - Date.now();
+          const seconds = Math.floor(today / 1000);
+          const minutes = Math.floor(seconds / 60);
+          const hours = Math.floor(minutes / 24);
+          console.log(item.expiryDate);
+          console.log("seconds = ", seconds%60);
+          console.log("minutes = ", minutes%60);
+          console.log("hours = ", hours%12);
+        }else{
+          console.log("none")
+        }
+      });
+    }
+  }, [items]);
+
+  const showSlider = !loading && items.length > 0;
+
   useEffect(() => {
     const fetchNewItems = async () => {
-      const gotItems = await axios.get(
-        "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems",
-      );
-      setItems(gotItems.data);
-      console.log(items)
+      try {
+        setLoading(true);
+        const gotItems = await axios.get(
+          "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems",
+        );
+        setItems(gotItems.data);
+        // expiryDate(gotItems.data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchNewItems();
   }, []);
@@ -61,27 +103,26 @@ const NewItems = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <div ref={sliderRef} className="keen__slider">
-            {items?.map((item, index) => (
-              <div className="col-lg-3 col-md-6 col-sm-6 col-xs-12" key="index">
-                <div className="nft__item">
-                  <div className="author_list_pp">
-                    <Link
-                      to="/author"
-                      data-bs-toggle="tooltip"
-                      data-bs-placement="top"
-                      title="Creator: Monica Lucas"
-                    >
-                      <img className="lazy" src={item.authorImage} alt="" />
+          <div className="slider__wrapper">
+            {showSlider && (
+              <button
+                className="left__arrow arrows"
+                onClick={() => instanceRef.current?.prev()}
+              >
+                ➩
+              </button>
+            )}
+            {loading ? (
+              <div className="loading__state--container">
+                {Array.from({ length: 4 }).map((_, index) => (
+                  <div className="nft__item" key={index}>
+                    <div className="author_list_pp">
+                      <div className="author__img--loading skeleton"></div>
                       <i className="fa fa-check"></i>
-                    </Link>
-                  </div>
-                  {/* <div className="de_countdown">5h 30m 32s</div> */}
-                  <div className="de_countdown">{item.expiryDate}</div>
-                  <div className="nft__item_wrap">
-                    <div className="nft__item_extra">
-                      <div className="nft__item_buttons">
-                        <button>Buy Now</button>
+                    </div>
+                    <div className="de_countdown"></div>
+                    <div className="nft__item_wrap">
+                      <div className="nft__item_extra">
                         <div className="nft__item_share">
                           <h4>Share</h4>
                           <a href="" target="_blank" rel="noreferrer">
@@ -95,28 +136,91 @@ const NewItems = () => {
                           </a>
                         </div>
                       </div>
+                      <div className="nft__img--loading skeleton"></div>
+                      {/* <img src="" className="lazy nft__item_preview" alt="" /> */}
                     </div>
-                    <Link to="/item-details">
-                      <img
-                        src={item.nftImage}
-                        className="lazy nft__item_preview"
-                        alt=""
-                      />
-                    </Link>
-                  </div>
-                  <div className="nft__item_info">
-                    <Link to="/item-details">
-                      <h4>{item.title}</h4>
-                    </Link>
-                    <div className="nft__item_price">{item.price}</div>
-                    <div className="nft__item_like">
-                      <i className="fa fa-heart"></i>
-                      <span>{item.likes}</span>
+                    <div className="nft__item_info">
+                      <div className="nft__title--loading skeleton"></div>
+                      <div className="nft__price--loading skeleton"></div>
+                      <div className="nft__item_like">
+                        <i className="fa fa-heart"></i>
+                        <span className="nft__likes--loading skeleton"></span>
+                      </div>
                     </div>
                   </div>
-                </div>
+                ))}
               </div>
-            ))}
+            ) : items.length === 0 ? (
+              <div className="empty-state">No collections found</div>
+            ) : (
+              <div ref={sliderRef} className="keen-slider">
+                {items?.map((item, index) => (
+                  <div className="keen-slider__slide" key={item.id}>
+                    <div className="nft__item">
+                      <div className="author_list_pp">
+                        <Link
+                          to="/author"
+                          data-bs-toggle="tooltip"
+                          data-bs-placement="top"
+                          title="Creator: Monica Lucas"
+                        >
+                          <img className="lazy" src={item.authorImage} alt="" />
+                          <i className="fa fa-check"></i>
+                        </Link>
+                      </div>
+                      {/* <div className="de_countdown">5h 30m 32s</div> */}
+                      {item.expiryDate ? (
+                        <div className="de_countdown">{item.expiryDate}</div>
+                      ) : null}
+                      <div className="nft__item_wrap">
+                        <div className="nft__item_extra">
+                          <div className="nft__item_buttons">
+                            <button>Buy Now</button>
+                            <div className="nft__item_share">
+                              <h4>Share</h4>
+                              <a href="" target="_blank" rel="noreferrer">
+                                <i className="fa fa-facebook fa-lg"></i>
+                              </a>
+                              <a href="" target="_blank" rel="noreferrer">
+                                <i className="fa fa-twitter fa-lg"></i>
+                              </a>
+                              <a href="">
+                                <i className="fa fa-envelope fa-lg"></i>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <Link to="/item-details">
+                          <img
+                            src={item.nftImage}
+                            className="lazy nft__item_preview"
+                            alt=""
+                          />
+                        </Link>
+                      </div>
+                      <div className="nft__item_info">
+                        <Link to="/item-details">
+                          <h4>{item.title}</h4>
+                        </Link>
+                        <div className="nft__item_price">{item.price}</div>
+                        <div className="nft__item_like">
+                          <i className="fa fa-heart"></i>
+                          <span>{item.likes}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {showSlider && (
+              <button
+                className="right__arrow arrows"
+                onClick={() => instanceRef.current?.next()}
+              >
+                ➩
+              </button>
+            )}
           </div>
         </div>
       </div>
