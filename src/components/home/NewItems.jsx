@@ -10,6 +10,7 @@ import "../../css/styles/new-items.css";
 const NewItems = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [timeLeft, setTimeLeft] = useState({});
   const [sliderRef, instanceRef] = useKeenSlider({
     loop: true,
     slides: {
@@ -39,38 +40,28 @@ const NewItems = () => {
     },
   });
 
-  // const expiryDate = (items) => {
-  //   if (items.length > 0) {
-  //     items.forEach((item) => {
-  //       const today = item.expiryDate - Date.now();
-  //       // const milliseconds = today / 1000;
-  //       const seconds = today / 1000;
-  //       const minutes = seconds / 60;
-  //       const hours = minutes / 24;
-  //       console.log("seconds = ", seconds);
-  //       console.log("minutes = ", minutes);
-  //       console.log("hours = ", hours);
-  //     });
-  //   }
-  // };
-
   useEffect(() => {
-    if (items.length > 0) {
+    const interval = setInterval(() => {
+      const timeUpdates = {};
       items.forEach((item) => {
-        if(item.expiryDate){
-          const today = item.expiryDate - Date.now();
-          const seconds = Math.floor(today / 1000);
-          const minutes = Math.floor(seconds / 60);
-          const hours = Math.floor(minutes / 24);
-          console.log(item.expiryDate);
-          console.log("seconds = ", seconds%60);
-          console.log("minutes = ", minutes%60);
-          console.log("hours = ", hours%12);
-        }else{
-          console.log("none")
+        if (item.expiryDate) {
+          const difference = item.expiryDate - Date.now();
+          if (difference <= 0) {
+            timeUpdates[item.id] = "Expired";
+          } else {
+            const totalSeconds = Math.floor(difference / 1000);
+            const seconds = totalSeconds % 60;
+            const minutes = Math.floor(totalSeconds / 60) % 60;
+            const hours = Math.floor(totalSeconds / 3600);
+
+            timeUpdates[item.id] = `${hours}h ${minutes}m ${seconds}s `;
+          }
         }
       });
-    }
+      setTimeLeft(timeUpdates);
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, [items]);
 
   const showSlider = !loading && items.length > 0;
@@ -81,9 +72,8 @@ const NewItems = () => {
         setLoading(true);
         const gotItems = await axios.get(
           "https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems",
-        );
+        )
         setItems(gotItems.data);
-        // expiryDate(gotItems.data);
       } catch (error) {
         console.error(error);
       } finally {
@@ -170,7 +160,9 @@ const NewItems = () => {
                       </div>
                       {/* <div className="de_countdown">5h 30m 32s</div> */}
                       {item.expiryDate ? (
-                        <div className="de_countdown">{item.expiryDate}</div>
+                        <div className="de_countdown">
+                          {timeLeft[item.id] || "Loading..."}
+                        </div>
                       ) : null}
                       <div className="nft__item_wrap">
                         <div className="nft__item_extra">
