@@ -52,13 +52,12 @@ const TopSellers = () => {
               </ol>
             </div>
           ) : (
-            // <div className="authors">
             <ol className="author_list">
               {users.map((user) => (
                 <li className="authors" key={user.id}>
                   <div className="author_list_pp">
                     <div className="author__id">{user.id}.</div>
-                    <Link to="/author">
+                    <Link to={`/author/${user.authorId}`}>
                       <img
                         className="lazy pp-author"
                         src={user.authorImage}
@@ -74,7 +73,6 @@ const TopSellers = () => {
                 </li>
               ))}
             </ol>
-            // </div>
           )}
         </div>
       </div>
