@@ -6,7 +6,6 @@ import axios from "axios";
 import "../../css/styles/exploreitems.css";
 
 const ExploreItems = () => {
-  // const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [allData, setAllData] = useState([]);
   const [visibleCount, setVisibleCount] = useState(8);
@@ -14,29 +13,29 @@ const ExploreItems = () => {
   const [timeLeft, setTimeLeft] = useState(0);
   const originalDataRef = useRef([]);
 
-  const interval = setInterval(() => {
-    allData.forEach((item) => {
+  useEffect(() => {
+    const interval = setInterval(() => {
       const timeUpdates = {};
-      if (item.expiryDate) {
-        const diff = item.expiryDate - Date.now();
-        if (diff <= 0) {
-          timeUpdates[item.id] = "Expired";
-        } else {
-          const totalSeconds = diff / 1000;
-          const seconds = totalSeconds % 60;
-          const minutes = (totalSeconds / 60) % 60;
-          const hours = totalSeconds / 3600;
+      allData.forEach((item) => {
+        if (item.expiryDate) {
+          const diff = item.expiryDate - Date.now();
+          if (diff <= 0) {
+            timeUpdates[item.id] = "Expired";
+          } else {
+            const totalSeconds = diff / 1000;
+            const seconds = Math.floor(totalSeconds % 60);
+            const minutes = Math.floor(totalSeconds / 60) % 60;
+            const hours = Math.floor(totalSeconds / 3600);
 
-          timeUpdates[item.id] = `${hours}h ${minutes}m ${seconds}s`
+            timeUpdates[item.id] = `${hours}h ${minutes}m ${seconds}s`;
+          }
         }
-      }
-      setTimeLeft(timeUpdates)
-    });
-  });
-  // const timeLeft = (() => {
-  //   const now = Date.now() - data.expiryDate;
-  //   const seconds = now/
-  // })
+      });
+      setTimeLeft(timeUpdates);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [allData]);
 
   useEffect(() => {
     if (!originalDataRef.current.length) return;
@@ -55,10 +54,7 @@ const ExploreItems = () => {
     } else if (status === "likes_high_to_low") {
       sortedData.sort((a, b) => b.likes - a.likes);
     }
-
     setAllData(sortedData);
-
-    console.log(status);
   }, [status]);
 
   useEffect(() => {
