@@ -11,8 +11,25 @@ const ExploreItems = () => {
   const [allData, setAllData] = useState([]);
   const [visibleCount, setVisibleCount] = useState(8);
   const [status, setStatus] = useState("");
+  const [timeLeft, setTimeLeft] = useState(0);
   const originalDataRef = useRef([]);
 
+  const interval = (setInterval) => {
+    allData.forEach((item) => {
+      const timeUpdates = 0;
+      if (item.expiryDate) {
+        const diff = item.expiryDate - Date.now();
+        if (diff <= 0) {
+          timeUpdates[item.id] = "Expired";
+        } else {
+          const totalSeconds = diff / 1000;
+          const seconds = totalSeconds % 60;
+          const minutes = (totalSeconds / 60) % 60;
+          const hours = totalSeconds / 3600;
+        }
+      }
+    });
+  };
   // const timeLeft = (() => {
   //   const now = Date.now() - data.expiryDate;
   //   const seconds = now/
@@ -120,7 +137,11 @@ const ExploreItems = () => {
                     <i className="fa fa-check"></i>
                   </Link>
                 </div>
-                <div className="de_countdown">{data.expiryDate}</div>
+                {data.expiryDate ? (
+                  <div className="de_countdown">
+                    {setTimeLeft() || "Loading..."}
+                  </div>
+                ) : null}
                 <div className="nft__item_wrap">
                   <div className="nft__item_extra">
                     <div className="nft__item_buttons">
