@@ -14,9 +14,9 @@ const ExploreItems = () => {
   const [timeLeft, setTimeLeft] = useState(0);
   const originalDataRef = useRef([]);
 
-  const interval = (setInterval) => {
+  const interval = setInterval(() => {
     allData.forEach((item) => {
-      const timeUpdates = 0;
+      const timeUpdates = {};
       if (item.expiryDate) {
         const diff = item.expiryDate - Date.now();
         if (diff <= 0) {
@@ -26,10 +26,13 @@ const ExploreItems = () => {
           const seconds = totalSeconds % 60;
           const minutes = (totalSeconds / 60) % 60;
           const hours = totalSeconds / 3600;
+
+          timeUpdates[item.id] = `${hours}h ${minutes}m ${seconds}s`
         }
       }
+      setTimeLeft(timeUpdates)
     });
-  };
+  });
   // const timeLeft = (() => {
   //   const now = Date.now() - data.expiryDate;
   //   const seconds = now/
@@ -139,7 +142,7 @@ const ExploreItems = () => {
                 </div>
                 {data.expiryDate ? (
                   <div className="de_countdown">
-                    {setTimeLeft() || "Loading..."}
+                    {timeLeft[data.id] || "Loading..."}
                   </div>
                 ) : null}
                 <div className="nft__item_wrap">
