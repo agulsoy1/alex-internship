@@ -14,12 +14,12 @@ li{
     animation: shimmer 2s infinite linear;
 }
 
-.author__img--loading{
+/* .author__img--loading{
     width: 100px;
     height: 50px;
     background-color: gray;
     border-radius: 50px;
-}
+} */
 
 .author__name--loading{
     width: 100px;
