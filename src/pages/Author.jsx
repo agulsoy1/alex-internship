@@ -60,7 +60,7 @@ const Author = () => {
             <div className="container">
               <div className="row">
                 <div className="col-md-12">
-                  <div className="d_profile de-flex">
+                  <div className="d_profile de-flex" data-aos="fade-up" data-aos-delay="100">
                     <div className="de-flex-col">
                       <div className="profile_avatar">
                         <div className="profile__img--loading skeleton"></div>
@@ -104,7 +104,7 @@ const Author = () => {
         </div>
       ) : (
         author && (
-          <div className="no-bottom no-top" id="content" key={author.id}>
+          <div className="no-bottom no-top" id="content" key={author.id} data-aos="fade-up" data-aos-delay="100">
             <div id="top"></div>
             <section
               id="profile_banner"
@@ -124,7 +124,7 @@ const Author = () => {
                   <div className="col-md-12">
                     <div className="d_profile de-flex">
                       <div className="de-flex-col">
-                        <div className="profile_avatar">
+                        <div className="profile_avatar" data-aos="fade-right" data-aos-delay="200">
                           <img src={author.authorImage} alt="" />
 
                           <i className="fa fa-check"></i>
@@ -144,7 +144,7 @@ const Author = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="profile_follow de-flex">
+                      <div className="profile_follow de-flex" data-aos="fade-left" data-aos-delay="200">
                         <div className="de-flex-col">
                           <div className="profile_follower">
                             {author.followers}
@@ -161,7 +161,7 @@ const Author = () => {
                     </div>
                   </div>
 
-                  <div className="col-md-12">
+                  <div className="col-md-12" data-aos="fade-down" data-aos-delay="300">
                     <div className="de_tab tab_simple">
                       <AuthorItems
                         authorProfile={author.authorImage}

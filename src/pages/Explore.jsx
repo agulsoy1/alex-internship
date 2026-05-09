@@ -5,16 +5,11 @@ import ExploreItems from "../components/explore/ExploreItems";
 const Explore = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
-<<<<<<< HEAD
-    //Any comment?
-=======
-    // FROM MAIN!! DO NOT REMOVE
->>>>>>> alex-onboarding
   }, []);
 
   return (
     <div id="wrapper">
-      <div className="no-bottom no-top" id="content">
+      <div className="no-bottom no-top" id="content" data-aos="fade-up" data-aos-delay="100">
         <div id="top"></div>
 
         <section

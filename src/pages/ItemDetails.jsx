@@ -36,12 +36,12 @@ const ItemDetails = () => {
           <section aria-label="section" className="mt90 sm-mt-0">
             <div className="container">
               <div className="row">
-                <div className="col-md-6 text-center">
+                <div className="col-md-6 text-center" data-aos="fade-right" data-aos-delay="200">
                   <div className="img-fluid img-rounded mb-sm-30 nft-image item__img--loading skeleton"></div>
                 </div>
                 <div className="col-md-6">
-                  <div className="item_info">
-                    <h2 className="item__title--loading skeleton"></h2>
+                  <div className="item_info" data-aos="fade-left" data-aos-delay="200">
+                    <h2 className="item__title--loading skeleton" data-aos-delay="300"></h2>
                     <div className="item_info_counts">
                       <div className="item_info_views">
                         <i className="fa fa-eye"></i>
@@ -95,7 +95,7 @@ const ItemDetails = () => {
             <section aria-label="section" className="mt90 sm-mt-0">
               <div className="container">
                 <div className="row">
-                  <div className="col-md-6 text-center">
+                  <div className="col-md-6 text-center" data-aos="fade-right" data-aos-delay="200">
                     <img
                       src={details.nftImage}
                       className="img-fluid img-rounded mb-sm-30 nft-image"
@@ -103,7 +103,7 @@ const ItemDetails = () => {
                     />
                   </div>
                   <div className="col-md-6">
-                    <div className="item_info">
+                    <div className="item_info" data-aos="fade-left" data-aos-delay="200">
                       <h2>
                         {details.title} #{details.tag}
                       </h2>

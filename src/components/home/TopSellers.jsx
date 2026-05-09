@@ -28,14 +28,14 @@ const TopSellers = () => {
     <section id="section-popular" className="pb-5">
       <div className="container">
         <div className="row">
-          <div className="col-lg-12">
+          <div className="col-lg-12" data-aos="fade-up" data-aos-delay="100">
             <div className="text-center">
               <h2>Top Sellers</h2>
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
           {loading ? (
-            <div className="col-md-12">
+            <div className="col-md-12" data-aos="fade-up" data-aos-delay="300">
               <ol className="author_list">
                 {Array.from({ length: 12 }).map((_, index) => (
                   <li key={index}>
@@ -52,7 +52,7 @@ const TopSellers = () => {
               </ol>
             </div>
           ) : (
-            <ol className="author_list">
+            <ol className="author_list" data-aos="fade-up">
               {users.map((user) => (
                 <li className="authors" key={user.id}>
                   <div className="author_list_pp">
