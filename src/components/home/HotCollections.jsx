@@ -62,13 +62,13 @@ const HotCollections = () => {
     <section id="section-collections" className="no-bottom">
       <div className="container">
         <div className="row">
-          <div className="col-lg-12">
+          <div className="col-lg-12" data-aos="fade-up" data-aos-delay="100">
             <div className="text-center">
               <h2>Hot Collections</h2>
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <div className="slider__wrapper">
+          <div className="slider__wrapper" data-aos="fade-up" data-aos-delay="200">
             {showSlider && (
               <button
                 className="arrow arrow-left"
