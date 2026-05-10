@@ -104,7 +104,7 @@ const ItemDetails = () => {
                   </div>
                   <div className="col-md-6">
                     <div className="item_info" data-aos="fade-left" data-aos-delay="200">
-                      <h2>
+                      <h2>5
                         {details.title} #{details.tag}
                       </h2>
 
