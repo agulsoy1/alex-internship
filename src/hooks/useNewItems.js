@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getNewItems } from "../services/nftAPI";
 
 export default function useNewItems() {

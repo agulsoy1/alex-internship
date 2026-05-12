@@ -4,7 +4,7 @@ import AuthorItemsSkeleton from "../components/UI/Author/AuthorItemsSkeleton";
 import AuthorItemsCard from "../components/UI/Author/AuthorItemsCard";
 
 const Author = () => {
-  const {author, setAuthor, loading, setLoading, increaseFollowers} = useAuthorItems();
+  const {author, loading, increaseFollowers} = useAuthorItems();
 
   return (
     <div id="wrapper">

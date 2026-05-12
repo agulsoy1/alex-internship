@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getAuthorItems } from "../services/nftAPI";
 import { useParams } from "react-router-dom";
 
@@ -30,5 +30,5 @@ export default function useAuthorItems() {
     getAuthor();
   }, [authorId]);
 
-  return { author, setAuthor, loading, setLoading, increaseFollowers };
+  return { author, loading, increaseFollowers };
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getHotCollections } from "../services/nftAPI";
 
 export default function useHotCollections() {

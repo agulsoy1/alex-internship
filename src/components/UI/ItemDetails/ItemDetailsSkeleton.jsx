@@ -18,10 +18,6 @@ export default function ItemDetailsSkeleton() {
               data-aos="fade-left"
               data-aos-delay="200"
             >
-              <h2
-                className="item__title--loading skeleton"
-                data-aos-delay="300"
-              ></h2>
               <div className="item_info_counts">
                 <div className="item_info_views">
                   <i className="fa fa-eye"></i>
@@ -48,7 +44,6 @@ export default function ItemDetailsSkeleton() {
               </div>
               <div className="de_tab tab_simple">
                 <div className="de_tab_content">
-                  <h6 className="label__loading skeleton"></h6>
                   <div className="item_author">
                     <div className="author_list_pp">
                       <div className="owner__img--loading skeleton"></div>

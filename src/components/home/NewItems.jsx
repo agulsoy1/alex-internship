@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import "../../css/styles/new-items.css";
 import NewItemsSkeleton from "../UI/NewItems/NewItemsSkeleton";
 import NewItemsCard from "../UI/NewItems/NewItemsCard";
 import SliderButtons from "../UI/SliderButtons";
-import { getNewItems } from "../../services/nftAPI";
 import useNewItems from "../../hooks/useNewItems";
 
 const sliderOptions = {
