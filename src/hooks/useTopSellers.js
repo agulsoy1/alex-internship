@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { getHotCollections } from "../services/nftAPI";
+import { getTopSellers } from "../services/nftAPI";
 
-export default function useHotCollections() {
+export default function useTopSellers() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchSellers = async () => {
       try {
-        const data = await getHotCollections();
+        const data = await getTopSellers();
         setUsers(data);
       } catch (error) {
         console.error(error);
@@ -16,7 +16,7 @@ export default function useHotCollections() {
         setLoading(false);
       }
     };
-    fetchUsers();
+    fetchSellers();
   }, []);
 
   return { users, loading };

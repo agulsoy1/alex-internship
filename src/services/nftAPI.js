@@ -14,6 +14,10 @@ export const getExploreItems = async () => {
   const response = await axios.get(`${API_URL}/explore`);
   return response.data;
 };
+export const getTopSellers = async () => {
+  const response = await axios.get(`${API_URL}/topSellers`)
+  return response.data;
+}
 export const getAuthorItems = async (authorId) => {
   const response = await axios.get(`${API_URL}/authors?author=${authorId}`);
   return response.data;
