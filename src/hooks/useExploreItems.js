@@ -20,7 +20,7 @@ export default function useExplore() {
       return;
     }
 
-    const sortedData = [...allData];
+    const sortedData = [...originalDataRef.current];
 
     if (status === "price_low_to_high") {
       sortedData.sort((a, b) => a.price - b.price);

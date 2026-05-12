@@ -22,7 +22,6 @@ const AuthorItems = ({ loading, authorProfile, nftCollection }) => {
                     </div>
 
                     <div className="nft__item_info">
-                      <h4 className="item__title--loading skeleton"></h4>
                       <div className="nft__item_price--loading skeleton"></div>
                       <div className="nft__item_like">
                         <i className="fa fa-heart"></i>

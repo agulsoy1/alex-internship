@@ -31,7 +31,6 @@ export default function ItemDetailsSkeleton() {
               <p className="item__desc--loading skeleton"></p>
               <div className="d-flex flex-row">
                 <div className="mr40">
-                  <h6 className="label__loading skeleton"></h6>
                   <div className="item_author">
                     <div className="author_list_pp">
                       <div className="owner__img--loading skeleton"></div>
@@ -54,7 +53,6 @@ export default function ItemDetailsSkeleton() {
                   </div>
                 </div>
                 <div className="spacer-40"></div>
-                <h6 className="label__loading skeleton"></h6>
                 <div className="nft-item-price--loading">
                   <div className="price__icon--loading skeleton"></div>
                   <div className="item__price--loading skeleton"></div>
