@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import "../../../src/css/styles/hot-collections.css";
-import leftArrow from "../../images/left__arrow.png"
-import rightArrow from "../../images/right__arrow.png"
+import HotCollectionsSkeleton from "../UI/HotCollections/HotCollectionsSkeleton";
+import HotCollectionsCard from "../UI/HotCollections/HotCollectionsCard";
+import useHotCollections from "../../hooks/useHotCollections";
+import SliderButtons from "../UI/SliderButtons";
 
 const HotCollections = () => {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { users, loading } = useHotCollections();
   const [sliderRef, instanceRef] = useKeenSlider({
     loop: true,
     slides: {
@@ -41,23 +39,6 @@ const HotCollections = () => {
 
   const showSlider = !loading && users.length > 0;
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        setLoading(true);
-        const getUsers = await axios.get(
-          "https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections",
-        );
-        setUsers(getUsers.data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchUsers();
-  }, []);
-
   return (
     <section id="section-collections" className="no-bottom">
       <div className="container">
@@ -68,78 +49,33 @@ const HotCollections = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <div className="slider__wrapper" data-aos="fade-up" data-aos-delay="200">
+          <div
+            className="slider__wrapper"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
             {showSlider && (
-              <button
-                className="arrow arrow-left"
+              <SliderButtons
+                direction="left"
                 onClick={() => instanceRef.current?.prev()}
-              >
-                ➩
-                {/* <img src={leftArrow} alt="" className="arrow__imgs arrow__left--img"/> */}
-              </button>
+              />
             )}
             {loading ? (
-              <div className="nft__loading--container">
-                {Array.from({ length: 4 }).map((_, index) => (
-                  <div className="nft_coll nft_coll--loading" key={index}>
-                    <div className="nft_wrap">
-                      <div className="nft__img--loading skeleton"></div>
-                    </div>
-                    <div className="nft_coll_pp">
-                      <div className="nft__author-img--loading skeleton"></div>
-                      <i className="fa fa-check"></i>
-                    </div>
-                    <div className="nft_coll_info">
-                      <div className="nft__title--loading skeleton"></div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <HotCollectionsSkeleton />
             ) : users.length === 0 ? (
               <div className="empty-state">No collections found.</div>
             ) : (
               <div ref={sliderRef} className="keen-slider">
                 {users.map((user) => (
-                  <div className="keen-slider__slide" key={user.id}>
-                    <div className="nft_coll">
-                      <div className="nft_wrap">
-                        <Link to={`/item-details/${user.nftId}`}>
-                          <img
-                            src={user.nftImage}
-                            className="lazy img-fluid"
-                            alt=""
-                          />
-                        </Link>
-                      </div>
-                      <div className="nft_coll_pp">
-                        <Link to={`/author/${user.authorId}`}>
-                          <img
-                            className="lazy pp-coll"
-                            src={user.authorImage}
-                            alt=""
-                          />
-                        </Link>
-                        <i className="fa fa-check"></i>
-                      </div>
-                      <div className="nft_coll_info">
-                        <Link to="/explore">
-                          <h4>{user.title}</h4>
-                        </Link>
-                        <span>ERC-{user.code}</span>
-                      </div>
-                    </div>
-                  </div>
+                  <HotCollectionsCard user={user} key={user.id} />
                 ))}
               </div>
             )}
             {showSlider && (
-              <button
-                className="arrow arrow-right"
+              <SliderButtons
+                direction="right"
                 onClick={() => instanceRef.current?.next()}
-              >
-                ➩
-                {/* <img src={rightArrow} alt="" className="arrow__imgs arrow__right--img"/> */}
-              </button>
+              />
             )}
           </div>
         </div>

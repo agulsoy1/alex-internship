@@ -36,11 +36,11 @@
   cursor: not-allowed;
 }
 
-.arrow-right{
+.right__arrow{
   left: 96%;
 }
 
-.arrow-left{
+.left__arrow{
   right: 96%;
   transform: rotate(180deg)
 }
