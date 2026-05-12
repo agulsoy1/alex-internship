@@ -13,7 +13,6 @@ export default function useItemDetails() {
     const fetchItemDetails = async () => {
       try {
         const data = await getItemDetails(nftId);
-        //   `https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${nftId}`,
         setDetails(data);
       } catch (error) {
         console.error(error);
