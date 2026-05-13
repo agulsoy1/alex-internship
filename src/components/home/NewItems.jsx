@@ -1,6 +1,6 @@
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
-import "../../css/styles/new-items.css";
+// import "../../css/styles/new-items.css";
 import NewItemsSkeleton from "../UI/NewItems/NewItemsSkeleton";
 import NewItemsCard from "../UI/NewItems/NewItemsCard";
 import SliderButtons from "../UI/SliderButtons";

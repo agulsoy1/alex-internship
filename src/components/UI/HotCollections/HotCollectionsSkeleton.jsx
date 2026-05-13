@@ -1,4 +1,5 @@
 import React from "react";
+import "../../../css/styles/hot-collections.css"
 
 export default function HotCollectionsSkeleton() {
   return (

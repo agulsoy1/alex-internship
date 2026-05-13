@@ -15,34 +15,9 @@
   position: relative;
 }
 
-.arrow {
-  position: absolute;
-  top: 45%;
-  display: flex;
-  font-size: 100px;
-  background: none;
-  border: none;
-  padding: 4px 0;
-  color: black;
-  cursor: pointer;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .arrow:disabled {
   opacity: 0.4;
   cursor: not-allowed;
-}
-
-.right__arrow{
-  left: 96%;
-}
-
-.left__arrow{
-  right: 96%;
-  transform: rotate(180deg)
 }
 
 .nft__loading--container {
@@ -59,10 +34,11 @@
   flex-direction: column;
   margin: 0 auto;
   flex: 1;
+  max-width: 250px;
 }
 
 .nft__img--loading {
-  padding: 60px;
+  padding: 20px 60px;
   background-color: rgba(0, 0, 0, 0.2);
   animation: pulse 1s infinite linear;
 }
@@ -93,11 +69,5 @@
   100% {
     opacity: 1;
     transform: translateX(-1);
-  }
-}
-
-@media (max-width: 980px) {
-  .nft__loading--container {
-    max-width: 500px;
   }
 }

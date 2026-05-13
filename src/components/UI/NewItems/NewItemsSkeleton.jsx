@@ -1,4 +1,5 @@
 import React from "react";
+import "../../../css/NFTCards.css"
 
 export default function NewItemsSkeleton() {
   return (

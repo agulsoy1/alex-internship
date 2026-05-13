@@ -1,0 +1,45 @@
+.arrows {
+  position: absolute;
+  top: 50%;
+  background: none;
+  color: white;
+  border: none;
+  font-size: 25px;
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.left__arrow {
+  right: 97.5%;
+  transform: rotate(180deg);
+}
+
+.right__arrow {
+  left: 97.5%;
+}
+
+.arrow__background {
+  background-color: lightgray;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .left__arrow {
+    right: 94%;
+    font-size: clamp(16px, 4vw, 32px);
+  }
+
+  .right__arrow {
+    left: 94%;
+    font-size: clamp(16px, 4vw, 32px);
+  }
+
+  .arrow__background {
+    padding: clamp(5px, 2vw, 10px);
+  }
+}

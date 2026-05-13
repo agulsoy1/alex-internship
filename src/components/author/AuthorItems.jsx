@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "../../css/general.css";
+import "../../css/NFTCards.css";
 
 const AuthorItems = ({ loading, authorProfile, nftCollection }) => {
   return (
